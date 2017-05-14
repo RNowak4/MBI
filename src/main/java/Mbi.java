@@ -1,6 +1,10 @@
 public class Mbi {
 
+    /**
+     * @param args 0 - nazwa pliku wejsciowego, 1 - wybor metody
+     */
     public static void main(String[] args) {
-        System.out.println("Mbi");
+
+        // TODO do ustalenia jak maja byc prezentowane wyniki wykonania programu
     }
 }
