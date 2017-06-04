@@ -2,36 +2,47 @@ package algorithms.impl;
 
 import algorithms.AlgorithmBenchmark;
 import utils.Benchmark;
+import utils.Constants;
+import utils.ProgramOutputHelper;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.net.URL;
 
 public class TrioDeNovoImpl implements AlgorithmBenchmark {
+    private final static String TRIO_DE_NOVO_RESOURCE_NAME = "triodenovo";
+    private final static String PED_ARG = "--ped";
+    private final static String IN_VCF_ARG = "--in_vcf";
+    private final static String OUT_VCF_ARG = "--out_vcf";
 
     public Benchmark findDeNovoChanges(String pedFile) {
+        final Benchmark benchmark = new Benchmark();
         long startTime, execTime;
         try {
+            URL trioDeNovo = getClass().getClassLoader().getResource(TRIO_DE_NOVO_RESOURCE_NAME);
             startTime = System.currentTimeMillis();
-            Process process = new ProcessBuilder("C:\\PathToExe\\MyExe.exe", "param1", "param2").start();
+            // TODO przeniesc te pliki do parametrow wywolania metody
+            Process process = new ProcessBuilder(trioDeNovo.getFile(),
+                    PED_ARG, "/home/radek/MBI/trio.denovo.ped",
+                    IN_VCF_ARG, "/home/radek/MBI/trio.denovo.vcf",
+                    OUT_VCF_ARG, "/home/radek/MBI/trio.denovo.vcf.out").start();
             execTime = System.currentTimeMillis() - startTime;
-            InputStream is = process.getInputStream();
-            InputStreamReader isr = new InputStreamReader(is);
-            BufferedReader br = new BufferedReader(isr);
-            String line;
 
-            while ((line = br.readLine()) != null) {
-                System.out.println(line);
-            }
-
+            final String programOutput = ProgramOutputHelper.getProgramOutput(process);
+            benchmark.setProgramOutput(programOutput);
+            benchmark.setExecutionTime(execTime);
+            benchmark.setAlgorithmName(getAlgorithmName());
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
+
+        return benchmark;
     }
 
     public Benchmark findDeNovoChanges(String pedFile, double mutationEstimation, long maxAlgorithmDepth) {
         return null;
+    }
+
+    public String getAlgorithmName() {
+        return Constants.TRIO_DE_NOVO;
     }
 }
