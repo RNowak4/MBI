@@ -14,7 +14,7 @@ public class TrioDeNovoImpl implements AlgorithmBenchmark {
     private final static String IN_VCF_ARG = "--in_vcf";
     private final static String OUT_VCF_ARG = "--out_vcf";
 
-    public Benchmark findDeNovoChanges(String pedFile) {
+    public Benchmark findDeNovoChanges(String pedFilePath, String vcfFilePath, String outputDir) {
         final Benchmark benchmark = new Benchmark();
         long startTime, execTime;
         try {
@@ -22,9 +22,9 @@ public class TrioDeNovoImpl implements AlgorithmBenchmark {
             startTime = System.currentTimeMillis();
             // TODO przeniesc te pliki do parametrow wywolania metody
             Process process = new ProcessBuilder(trioDeNovo.getFile(),
-                    PED_ARG, "/home/radek/MBI/trio.denovo.ped",
-                    IN_VCF_ARG, "/home/radek/MBI/trio.denovo.vcf",
-                    OUT_VCF_ARG, "/home/radek/MBI/trio.denovo.vcf.out").start();
+                    PED_ARG, pedFilePath,
+                    IN_VCF_ARG, vcfFilePath,
+                    OUT_VCF_ARG, outputDir + "/trio.denovo.vcf.out").start();
             execTime = System.currentTimeMillis() - startTime;
 
             final String programOutput = ProgramOutputHelper.getProgramOutput(process);
