@@ -11,20 +11,20 @@ import java.net.URL;
 public class TrioDeNovoImpl implements AlgorithmBenchmark {
     private final static String TRIO_DE_NOVO_RESOURCE_NAME = "triodenovo";
     private final static String PED_ARG = "--ped";
-    private final static String IN_VCF_ARG = "--in_vcf";
-    private final static String OUT_VCF_ARG = "--out_vcf";
+    private final static String IN_ARG = "--in_vcf";
+    private final static String OUT_ARG = "--out_vcf";
 
-    public Benchmark findDeNovoChanges(String pedFilePath, String vcfFilePath, String outputDir) {
+    public Benchmark findDeNovoChanges(String pedFilePath, String sourceFilePath, String outputDir) {
         final Benchmark benchmark = new Benchmark();
         long startTime, execTime;
         try {
-            URL trioDeNovo = getClass().getClassLoader().getResource(TRIO_DE_NOVO_RESOURCE_NAME);
+            URL algorithm = getClass().getClassLoader().getResource(TRIO_DE_NOVO_RESOURCE_NAME);
             startTime = System.currentTimeMillis();
-            // TODO przeniesc te pliki do parametrow wywolania metody
-            Process process = new ProcessBuilder(trioDeNovo.getFile(),
-                    PED_ARG, pedFilePath,
-                    IN_VCF_ARG, vcfFilePath,
-                    OUT_VCF_ARG, outputDir + "/trio.denovo.vcf.out").start();
+
+            Process process = new ProcessBuilder(algorithm.getFile(),
+                                                 PED_ARG, pedFilePath,
+                                                 IN_ARG, sourceFilePath,
+                                                 OUT_ARG, outputDir + "/trio.denovo.vcf.out").start();
             execTime = System.currentTimeMillis() - startTime;
 
             final String programOutput = ProgramOutputHelper.getProgramOutput(process);
