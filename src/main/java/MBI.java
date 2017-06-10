@@ -13,14 +13,13 @@ public class MBI {
      *             3 - folder pliku wyjsciowego
      */
     public static void main(String[] args) {
-        if (args.length < 3) {
+        if (args.length < 4) {
             System.out.println("Za malo parametrow wywolania programu!");
         } else {
-            String methodId = args[0];
-            String pedFilePath = args[1];
-            String sourceFilePath = args[2];
-            String outputDir = args[3];
-
+            final String methodId = args[0];
+            final String pedFilePath = args[1];
+            final String sourceFilePath = args[2];
+            final String outputDir = args[3];
 
             final List<Benchmark> benchmarks = algorithmRunner.runBenchmarks(methodId, pedFilePath, sourceFilePath, outputDir);
             for (Benchmark benchmark : benchmarks) {
