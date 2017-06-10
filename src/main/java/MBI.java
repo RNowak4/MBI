@@ -20,9 +20,11 @@ public class MBI
 
             String pedFilePath = MBI.class.getClassLoader().getResource("data.ped").getPath();
             String sourceFilePath = MBI.class.getClassLoader().getResource("data.vcf").getPath();
-            String outputDir = "/Users/Pawel/Desktop";
+            String outputDir = "/home/radek";
 
-            Benchmark benchmark = new TrioDeNovoImpl().findDeNovoChanges(pedFilePath, sourceFilePath, outputDir);
+//            Benchmark benchmark = new TrioDeNovoImpl().findDeNovoChanges(pedFilePath, sourceFilePath, outputDir);
+//        Benchmark benchmark = new DeNovoGearImpl().findDeNovoChanges(pedFilePath, sourceFilePath, outputDir);
+        Benchmark benchmark = new PhaseByTransmissionImpl().findDeNovoChanges(pedFilePath, sourceFilePath, outputDir);
             System.out.println(benchmark.getAlgorithmName() + ": " + benchmark.getExecutionTime() + " ms.");
 
             // TODO do ustalenia jak maja byc prezentowane wyniki wykonania programu
