@@ -13,8 +13,10 @@ public class TrioDeNovoImpl implements AlgorithmBenchmark {
     private final static String PED_ARG = "--ped";
     private final static String IN_ARG = "--in_vcf";
     private final static String OUT_ARG = "--out_vcf";
+    private final static String OUT_NAME = "triodenovo.vcf.out";
 
-    public Benchmark findDeNovoChanges(String pedFilePath, String sourceFilePath, String outputDir) {
+    public Benchmark findDeNovoChanges(String pedFilePath, String sourceFilePath,
+                                       String outputDir, String referenceFilePath) {
         final Benchmark benchmark = new Benchmark();
         long startTime, execTime;
         try {
@@ -24,7 +26,7 @@ public class TrioDeNovoImpl implements AlgorithmBenchmark {
             Process process = new ProcessBuilder(algorithm.getFile(),
                                                  PED_ARG, pedFilePath,
                                                  IN_ARG, sourceFilePath,
-                                                 OUT_ARG, outputDir + "/trio.denovo.vcf.out").start();
+                                                 OUT_ARG, outputDir + "/" + OUT_NAME).start();
             execTime = System.currentTimeMillis() - startTime;
 
             final String programOutput = ProgramOutputHelper.getProgramOutput(process);
@@ -36,10 +38,6 @@ public class TrioDeNovoImpl implements AlgorithmBenchmark {
         }
 
         return benchmark;
-    }
-
-    public Benchmark findDeNovoChanges(String pedFile, double mutationEstimation, long maxAlgorithmDepth) {
-        return null;
     }
 
     public String getAlgorithmName() {

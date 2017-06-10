@@ -10,18 +10,18 @@ public class PhaseByTransmissionImpl implements AlgorithmBenchmark {
     private final static String PHASE_BY_TRANSMISSION = "PhaseByTransmission";
     private final static String IN_ARG = "-V";
     private final static String PED_ARG = "-ped";
-    private final static String OUTPUT_FILE_ARG = "-o";
-    private final static String OUTPUT_FILE_NAME = "phaseByTransmission.vcf";
-    private final static String REFERENCE_FILE_ARG = "-R";
-    private final static String REFERENCE_FILE_NAME = "/home/radek/data.fasta";
+    private final static String OUT_ARG = "-o";
+    private final static String OUT_NAME = "phaseByTransmission.vcf.out";
+    private final static String REFERENCE_ARG = "-R";
 
-    public Benchmark findDeNovoChanges(String pedFilePath, String vcfFilePath, String outputDir) {
+    public Benchmark findDeNovoChanges(String pedFilePath, String vcfFilePath,
+                                       String outputDir, String referenceFilePath) {
         final Benchmark benchmark = new Benchmark();
         final String[] args = {ALGORITHM_NAME_ARG, PHASE_BY_TRANSMISSION,
-                IN_ARG, vcfFilePath,
-                PED_ARG, pedFilePath,
-                OUTPUT_FILE_ARG, outputDir + "/" + OUTPUT_FILE_NAME,
-                REFERENCE_FILE_ARG, REFERENCE_FILE_NAME};
+                               IN_ARG, vcfFilePath,
+                               PED_ARG, pedFilePath,
+                               OUT_ARG, outputDir + "/" + OUT_NAME,
+                               REFERENCE_ARG, referenceFilePath};
 
         long startTime = System.currentTimeMillis();
         CommandLineGATK.main(args);
@@ -30,10 +30,6 @@ public class PhaseByTransmissionImpl implements AlgorithmBenchmark {
         benchmark.setAlgorithmName(getAlgorithmName());
         benchmark.setExecutionTime(execTime);
         return benchmark;
-    }
-
-    public Benchmark findDeNovoChanges(String pedFile, double mutationEstimation, long maxAlgorithmDepth) {
-        return null;
     }
 
     public String getAlgorithmName() {

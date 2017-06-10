@@ -19,23 +19,25 @@ public class AlgorithmRunner {
         algorithmsMap.put("3", new TrioDeNovoImpl());
     }
 
-    public List<Benchmark> runBenchmarks(String methodId, String pedFilePath, String sourceFilePath, String outputDir) {
+    public List<Benchmark> runBenchmarks(String methodId, String pedFilePath, String sourceFilePath,
+                                         String outputDir, String referenceFilePath) {
         final List<Benchmark> benchmarks = new ArrayList<>();
 
         if("0".equals(methodId)) {
             for (String key : algorithmsMap.keySet()) {
-                benchmarks.add(runBenchmark(key, pedFilePath, sourceFilePath, outputDir));
+                benchmarks.add(runBenchmark(key, pedFilePath, sourceFilePath, outputDir, referenceFilePath));
             }
         } else {
-            benchmarks.add(runBenchmark(methodId, pedFilePath, sourceFilePath, outputDir));
+            benchmarks.add(runBenchmark(methodId, pedFilePath, sourceFilePath, outputDir, referenceFilePath));
         }
 
         return benchmarks;
     }
 
-    private Benchmark runBenchmark(String methodId, String pedFilePath, String sourceFilePath, String outputDir) {
+    private Benchmark runBenchmark(String methodId, String pedFilePath, String sourceFilePath,
+                                   String outputDir, String referenceFilePath) {
         final AlgorithmBenchmark algorithmsImpl = algorithmsMap.get(methodId);
 
-        return algorithmsImpl.findDeNovoChanges(pedFilePath, sourceFilePath, outputDir);
+        return algorithmsImpl.findDeNovoChanges(pedFilePath, sourceFilePath, outputDir, referenceFilePath);
     }
 }

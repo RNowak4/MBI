@@ -10,7 +10,8 @@ public class MBI {
      * @param args 0 - wybor metody,
      *             1 - nazwa pliku wejsciowego ped,
      *             2 - nazwa pliku wejsciowego vcf,
-     *             3 - folder pliku wyjsciowego
+     *             3 - folder pliku wyjsciowego,
+     *             4 - (opcjonalnie) nazwa pliku wejsciowego reference
      */
     public static void main(String[] args) {
         if (args.length < 4) {
@@ -20,8 +21,10 @@ public class MBI {
             final String pedFilePath = args[1];
             final String sourceFilePath = args[2];
             final String outputDir = args[3];
+            final String referenceFilePath = args[4];
 
-            final List<Benchmark> benchmarks = algorithmRunner.runBenchmarks(methodId, pedFilePath, sourceFilePath, outputDir);
+            final List<Benchmark> benchmarks = algorithmRunner.runBenchmarks(methodId, pedFilePath, sourceFilePath,
+                                                                             outputDir, referenceFilePath);
             for (Benchmark benchmark : benchmarks) {
                 System.out.println(benchmark);
             }

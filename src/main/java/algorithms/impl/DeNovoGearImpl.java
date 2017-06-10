@@ -14,7 +14,8 @@ public class DeNovoGearImpl implements AlgorithmBenchmark {
     private final static String PED_ARG = "--ped";
     private final static String IN_ARG = "--in_vcf";
 
-    public Benchmark findDeNovoChanges(String pedFilePath, String sourceFilePath, String outputDir) {
+    public Benchmark findDeNovoChanges(String pedFilePath, String sourceFilePath,
+                                       String outputDir, String referenceFilePath) {
         final Benchmark benchmark = new Benchmark();
         long startTime, execTime;
         try {
@@ -35,9 +36,6 @@ public class DeNovoGearImpl implements AlgorithmBenchmark {
         }
 
         return benchmark;
-    }
-    public Benchmark findDeNovoChanges(String pedFile, double mutationEstimation, long maxAlgorithmDepth) {
-        return null;
     }
 
     public String getAlgorithmName() {
