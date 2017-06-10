@@ -14,7 +14,7 @@ public class MBI {
      *             4 - (opcjonalnie) nazwa pliku wejsciowego reference
      */
     public static void main(String[] args) {
-        if (args.length < 4) {
+        if (args.length < 5) {
             System.out.println("Za malo parametrow wywolania programu!");
         } else {
             final String methodId = args[0];
