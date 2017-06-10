@@ -12,13 +12,16 @@ public class PhaseByTransmissionImpl implements AlgorithmBenchmark {
     private final static String PED_ARG = "-ped";
     private final static String OUTPUT_FILE_ARG = "-o";
     private final static String OUTPUT_FILE_NAME = "phaseByTransmission.vcf";
+    private final static String REFERENCE_FILE_ARG = "-R";
+    private final static String REFERENCE_FILE_NAME = "/home/radek/data.fasta";
 
     public Benchmark findDeNovoChanges(String pedFilePath, String vcfFilePath, String outputDir) {
         final Benchmark benchmark = new Benchmark();
         final String[] args = {ALGORITHM_NAME_ARG, PHASE_BY_TRANSMISSION,
                 IN_ARG, vcfFilePath,
                 PED_ARG, pedFilePath,
-                OUTPUT_FILE_ARG, outputDir + "/" + OUTPUT_FILE_NAME};
+                OUTPUT_FILE_ARG, outputDir + "/" + OUTPUT_FILE_NAME,
+                REFERENCE_FILE_ARG, REFERENCE_FILE_NAME};
 
         long startTime = System.currentTimeMillis();
         CommandLineGATK.main(args);
